@@ -1,6 +1,6 @@
 import random
 from IChing.Yao import Yao
-from IChing.Divinatories import DivinatoryFactory
+from IChing.DivinatoryFactory import DivinatoryFactory
 
 # 周易
 class IChing:

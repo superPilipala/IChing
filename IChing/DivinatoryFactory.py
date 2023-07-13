@@ -1,4 +1,4 @@
-from Divinatories import *
+from IChing.HexagramDivinatories import *
 
 
 # 六十四卦工厂基类
@@ -15,11 +15,11 @@ class DivinatoryFactoryBase:
 class DivinatoryFactory(DivinatoryFactoryBase):
     def __init__(self):
         super().__init__()
-        self.divinatories[0b000][0b000] = KunDivi()
+        self.divinatories[0b000][0b000] = KunDiv()
         self.divinatories[0b111][0b111] = QianDiv()
         self.divinatories[0b011][0b111] = GuaiDiv()
-        self.divinatories[0b101][0b111] = YouDiv()
-        self.divinatories[0b001][0b111] = ZhuangDiv()
+        self.divinatories[0b101][0b111] = DaYouDiv()
+        self.divinatories[0b001][0b111] = DaYouDiv()
         self.divinatories[0b110][0b111] = XiaoXuDiv()
 
     # 返回卦象

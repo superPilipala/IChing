@@ -65,6 +65,7 @@ class Hexagram(BaseModel):
             flag_array.append(0)
         return flag_array
 
+
     def get_content(self) -> list[str]:
         contents = []
         csv_io = CsvIO()
@@ -108,6 +109,8 @@ class Hexagram(BaseModel):
             changed_value = self.value ^ self.changed_flag
             contents.append(csv_io.get_content(changed_value))
             return contents
+
+
 
 
 # 字典转类

@@ -2,13 +2,14 @@ import random
 from IChing.Yao import Yao
 from IChing.DivinatoryFactory import DivinatoryFactory
 
+
 # 周易
 class IChing:
 
     def __init__(self):
         # 卦象
-        # 变卦
-        self.changed_divinatory = 0
+        # # 变卦
+        # self.changed_divinatory = 0
         # 主卦
         self.main_divinatory = 0
 
@@ -19,6 +20,8 @@ class IChing:
 
         # 占卜结果
         self.origin_divinatories: list[Yao] = []
+
+        self.init_yaoes()
 
     # 起卦随机正反
     @staticmethod
@@ -48,29 +51,21 @@ class IChing:
             # 检查是否是变爻
             if yao.is_change:
                 self.change_count += 1
-                self.yao_index = 0b1 << index
+                self.yao_index = self.yao_index | (0b1 << index)
 
             # 得到本卦
             self.main_divinatory |= a
 
             index += 1
 
-        # 变卦
-        self.changed_divinatory = self.main_divinatory ^ self.yao_index
-
     # 返回卦象标识符
     def get_binary_divinatory(self):
-        self.init_yaoes()
-        print(bin(self.changed_divinatory))
-
-        # 6爻皆变
-        if self.yao_index == 6:
-            return self.changed_divinatory
-        else:
-            return self.main_divinatory
+        return self.main_divinatory
 
     # 得到卦象对象
     def get_divinatory(self):
         div_f = DivinatoryFactory()
         binary = self.get_binary_divinatory()
-        return div_f.get_divinatory(binary, self.yao_index)
+        div = div_f.get_divinatory(binary, self.yao_index)
+        div.set_changeed_count(self.change_count)
+        return div

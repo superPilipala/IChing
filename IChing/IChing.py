@@ -21,8 +21,6 @@ class IChing:
         # 占卜结果
         self.origin_divinatories: list[Yao] = []
 
-        self.init_yaoes()
-
     # 起卦随机正反
     @staticmethod
     def roll() -> bool:
@@ -37,14 +35,17 @@ class IChing:
         return all
 
     # 6爻得到一卦
-    def init_yaoes(self):
-        # 起卦
-        for i in range(6):
-            self.origin_divinatories.append(Yao(self.get_yao()))
+    def init_yaoes(self, byte_divinatories: list):
+
+        if not byte_divinatories:
+            # 起卦
+            for i in range(6):
+                byte_divinatories.append(self.get_yao())
+        for div in byte_divinatories:
+            self.origin_divinatories.append(Yao(div))
 
         index = 0
         for yao in self.origin_divinatories:
-            print(yao.yao)
             # 得到爻
             a = yao.yin_yang << index
 
@@ -60,7 +61,10 @@ class IChing:
 
     # 返回卦象标识符
     def get_binary_divinatory(self):
-        return self.main_divinatory
+        if self.main_divinatory:
+            return self.main_divinatory
+        else:
+            raise "先初始化"
 
     # 得到卦象对象
     def get_divinatory(self):

@@ -45,6 +45,6 @@ class CsvIO:
 
     def get_yao_content(self, binary_hexagram, binary_yao):
         hexagram_df = self.df_all[self.df_all['value'] == binary_hexagram]
-        print(hexagram_df)
+        # print(hexagram_df)
         str_content = hexagram_df['{}'.format(int(binary_yao))].values[0]
         return str_content

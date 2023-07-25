@@ -81,9 +81,9 @@ class Hexagram(BaseModel):
         if self.changed_count == 2:
             flag_array = self.get_change_flag_array(self.changed_flag)
             up_yao_index = flag_array[0]
-            contents.append(csv_io.get_yao_content(self.value,up_yao_index))
+            contents.append(csv_io.get_yao_content(self.value, up_yao_index))
             down_yao_index = flag_array[1]
-            contents.append(csv_io.get_yao_content(self.value,down_yao_index))
+            contents.append(csv_io.get_yao_content(self.value, down_yao_index))
             return contents
         # 三个变爻，用本卦卦辞和变卦卦辞综合考虑
         if self.changed_count == 3:
@@ -93,7 +93,7 @@ class Hexagram(BaseModel):
         # 四个变爻，用变卦另外两个静爻，下爻为主
         if self.changed_count == 4:
             flag_array = self.get_change_flag_array(~self.changed_flag)
-            changed_value = self.value^self.changed_flag
+            changed_value = self.value ^ self.changed_flag
             contents.append(csv_io.get_yao_content(changed_value, flag_array[1]))
             contents.append(csv_io.get_yao_content(changed_value, flag_array[0]))
             return contents
@@ -105,11 +105,12 @@ class Hexagram(BaseModel):
             return contents
         # 六爻皆变，如果是乾坤二卦，用九，用六来解释，其他使用变卦卦辞
         if self.changed_count == 6:
-            changed_value = self.value ^ self.changed_flag
-            contents.append(csv_io.get_content(changed_value))
+            if self.value == 64 | self.value==0:
+                contents.append(csv_io.get_yao_content(self.value, 6))
+            else:
+                changed_value = self.value ^ self.changed_flag
+                contents.append(csv_io.get_content(changed_value))
             return contents
-
-
 
 
 # 字典转类

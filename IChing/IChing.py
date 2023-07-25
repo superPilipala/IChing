@@ -73,3 +73,7 @@ class IChing:
         div = div_f.get_divinatory(binary, self.yao_index)
         div.set_changeed_count(self.change_count)
         return div
+
+    # 获取原始得到得卦象
+    def get_origin_div(self):
+        return self.origin_divinatories

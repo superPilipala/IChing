@@ -65,6 +65,7 @@ class Hexagram(BaseModel):
             flag_array.append(0)
         return flag_array
 
+
     def get_content(self) -> list[str]:
         contents = []
         csv_io = CsvIO()
